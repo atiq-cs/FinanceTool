@@ -67,12 +67,19 @@ class ERManager (
     val interval = "5min"
     val fequency = "TIME_SERIES_DAILY"
 
-    val tsd = fetchData(symbol, interval, fequency, apiKey)
-    if (tsd != null) {
-      // Iterate using forEach
-      tsd.prices.forEach { (key, value) ->
-        println("Date: $key, closing price: ${value.close}")
-      }
+    val prices = fetchData(symbol, interval, fequency, apiKey)
+
+    if (prices != null && prices.isNotEmpty()) {      
+      val iterator = prices.entries.iterator()
+      val firstEntry = iterator.next()
+      val currentPrice = firstEntry.value.close
+      println("Target date: ${firstEntry.key}, current price: $currentPrice")
+      val prioPrice = iterator.next().value.close
+      println("Previous price: $prioPrice")
+
+      val delta = String.format("%.2f", 100.0 * currentPrice / prioPrice - 100.0).toFloat()
+      println("Output:" + ( if (delta>0.0) " +" else " " ) + "$delta% $currentPrice")
+      // println("Output:${if (delta>0.0) " +" else " "}$delta% $currentPrice")
     }
   }
 
@@ -81,7 +88,7 @@ class ERManager (
     interval: String,
     frequency: String,
     apiKey: String,
-  ): TimeSeriesDaily? {
+  ): Map<String, PricesDaily>? {
 
     val client = HttpClient(CIO) {
       install(ContentNegotiation) {
@@ -90,23 +97,24 @@ class ERManager (
     }
     val customJson = Json { ignoreUnknownKeys = true }
 
+    val outputSize = "compact"
     val finDataProviderURL = "https://www.alphavantage.co/query"
+    // "&interval=" + interval +  not required for 'TIME_SERIES_DAILY'
     val url = finDataProviderURL + "?function=" + frequency + "&symbol=" +
-      symbol + "&interval=" + interval + "&apikey=" + apiKey
-
+      symbol + "&outputsize="+ outputSize + "&apikey=" + apiKey
 
     if (mocking) {
-      // Deserialize JSON into the User class
+      // Deserialize JSON into the TimeSeriesDaily class
       val tsd = customJson.decodeFromString<TimeSeriesDaily>(mJsonText)
-      return tsd
+      return tsd.prices
     }
 
     return try {
       val jsonText = client.get(url).bodyAsText()
 
-      // Deserialize JSON into the User class
+      // Deserialize JSON into the TimeSeriesDaily class
       val tsd = customJson.decodeFromString<TimeSeriesDaily>(jsonText)
-      tsd
+      tsd.prices
     } catch (e: Exception) {
         println("Error: ${e.message}")
         null

@@ -7,9 +7,12 @@ package FinTool
 
 fun main(args: Array<String>) {
   /**
-   * Timer constructor is responsible for parsing and processing the CL
+   * ERManager constructor is responsible for parsing and processing the CL
    * arguments
-   * Create instance of class Timer and call runAsync()
+   * Create instance of class ERManager and call runAsync()
+   * For now, using mocking to get Json data locally instead of using web
+   *  client
    */
+  
   ERManager().runAsync()
 }

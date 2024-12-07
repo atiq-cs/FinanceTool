@@ -51,9 +51,9 @@ class AppTest {
       val interval = "5min"
       val fequency = "TIME_SERIES_DAILY"
 
-      val tsd = classUnderTest.fetchData(symbol, interval, fequency, apiKey)
-      assertNotNull(tsd)
-      assertTrue(areDoublesEqual(tsd.prices["2024-12-04"]?.close?: 0.0, 174.37))
-      assertTrue(areDoublesEqual(tsd.prices["2024-12-03"]?.close?: 0.0, 171.34))
+      val prices = classUnderTest.fetchData(symbol, interval, fequency, apiKey)
+      assertNotNull(prices)
+      assertTrue(areDoublesEqual(prices["2024-12-04"]?.close?: 0.0, 174.37))
+      assertTrue(areDoublesEqual(prices["2024-12-03"]?.close?: 0.0, 171.34))
     }
 }
