@@ -21,6 +21,10 @@ plugins {
   application
 }
 
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
 repositories {
   // Use Maven Central for resolving dependencies.
   mavenCentral()
