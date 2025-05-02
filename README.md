@@ -8,7 +8,16 @@ Any platform that runs kotlin
 
 **Command Line Examples**
 
+We provide the year on command argument. This is due to the nature that our
+input tables are organized quarter wise and dates in tables always belong to
+same year!
+
 Run from outside of project dir, assuming it's `~/Code/kotlin/FinTool`,
-```bash
-gradle run --project-dir ~/Code/kotlin/FinTool"
+```plain
+gradle run --project-dir ~/Code/kotlin/FinTool" --args="2025"
+```
+  
+I utilize following simple version (run inside the project dir) frequently,
+```plain
+gradle run --quiet --console=plain --args="2025"
 ```
