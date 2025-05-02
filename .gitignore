@@ -12,3 +12,6 @@ app/data
 
 # kotlin compiler session files
 .kotlin
+
+# local copies of various json, conf files
+ws_local
