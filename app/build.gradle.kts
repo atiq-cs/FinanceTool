@@ -6,6 +6,7 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
+val kotlin_version: String by project
 val ktor_version: String by project
 val coroutines_version: String by project
 val k_serialization_version: String by project
@@ -14,8 +15,7 @@ plugins {
   // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
   alias(libs.plugins.kotlin.jvm)
   // This line is equivalent to the previous alias statement
-  // kotlin("jvm") version "2.0.20"
-  kotlin("plugin.serialization") version "2.0.20"
+  kotlin("plugin.serialization")
 
   // Apply the application plugin to add support for building a CLI application in Java.
   application
@@ -46,7 +46,7 @@ testing {
     // Configure the built-in test suite
     val test by getting(JvmTestSuite::class) {
       // Use Kotlin Test test framework
-      useKotlinTest("2.0.20")
+      useKotlinTest("$kotlin_version")
     }
   }
 }
