@@ -6,16 +6,12 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
-val kotlin_version: String by project
-val ktor_version: String by project
-val coroutines_version: String by project
-val k_serialization_version: String by project
-
 plugins {
   // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-  alias(libs.plugins.kotlin.jvm)
-  // This line is equivalent to the previous alias statement
-  kotlin("plugin.serialization")
+  // equivalent to
+  //   kotlin("jvm") version libs.versions.kotlin.get()
+  alias(libs.plugins.jvm)
+  alias(libs.plugins.serialization)
 
   // Apply the application plugin to add support for building a CLI application in Java.
   application
@@ -33,12 +29,12 @@ repositories {
 dependencies {
   // This dependency is used by the application.
   implementation(libs.guava)
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
-  implementation("io.ktor:ktor-client-core:$ktor_version")
-  implementation("io.ktor:ktor-client-cio:$ktor_version")
-  implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
-  implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$k_serialization_version")
+  implementation(libs.kotlinx.coroutines.core)
+  implementation(libs.ktor.client.core)
+  implementation(libs.ktor.client.cio)
+  implementation(libs.ktor.client.content.negotiation)
+  implementation(libs.ktor.serialization.kotlinx.json)
+  implementation(libs.kotlinx.serialization.json)
 }
 
 testing {
@@ -46,7 +42,7 @@ testing {
     // Configure the built-in test suite
     val test by getting(JvmTestSuite::class) {
       // Use Kotlin Test test framework
-      useKotlinTest("$kotlin_version")
+      useKotlinTest(libs.versions.kotlin.get())
     }
   }
 }
@@ -54,7 +50,7 @@ testing {
 // Apply a specific Java toolchain to ease working on different environments.
 java {
   toolchain {
-    languageVersion = JavaLanguageVersion.of(21)
+    languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInt())
   }
 }
 

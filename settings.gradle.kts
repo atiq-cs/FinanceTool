@@ -6,21 +6,12 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
-pluginManagement {
-  // ref for how to use version variable:
-  //  https://docs.gradle.org/current/userguide/plugins.html
-  val kotlin_version: String by settings
-
-  plugins {
-    // Apply the foojay-resolver plugin to allow automatic download of JDKs
-    //  latest release version listed at https://plugins.gradle.org/plugin/org.gradle.toolchains.foojay-resolver-convention
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
-
-    // kotlin("jvm") version is same as kotlin_version
-    // latest release version as per https://plugins.gradle.org/plugin/org.jetbrains.kotlin.plugin.serialization
-    // which is same as `kotlin_version`; next statement 
-    kotlin("plugin.serialization") version "$kotlin_version"
-  }
+plugins {
+  // Use sdkman instead for downloading SDK: JDK
+  // Apply the foojay-resolver plugin to allow automatic download of JDKs
+  //  latest release version listed at https://plugins.gradle.org/plugin/org.gradle.toolchains.foojay-resolver-convention
+  // id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
+  // alias(libs.plugins.foojay.resolver.convention)
 }
 
 rootProject.name = "FinTool"
