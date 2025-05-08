@@ -44,16 +44,18 @@ class AppTest {
     }
       
     @Test fun appCanParseAVJsonFormat() = runBlocking {
-      val classUnderTest = ERManager(jsonText1, mocking = true)
+      val classUnderTest = AlphaVantage(jsonText1, mocking = true)
 
-      val apiKey = ConfigManager().getAPIKey()
+      val date = "12-03-2024"
       val symbol = "GOOGL"
-      val interval = "5min"
-      val fequency = "TIME_SERIES_DAILY"
+      // val interval = "5min"
+      // Default in AlphaVantage class is TIME_SERIES_DAILY, based on date
+      //  range this can change to INTRADAY
+      // val fequency = "TIME_SERIES_DAILY"
 
-      val prices = classUnderTest.fetchData(symbol, interval, fequency, apiKey)
+      val prices = classUnderTest.getClosingPricePair(date, symbol)
       assertNotNull(prices)
-      assertTrue(areDoublesEqual(prices["2024-12-04"]?.close?: 0.0, 174.37))
-      assertTrue(areDoublesEqual(prices["2024-12-03"]?.close?: 0.0, 171.34))
+      assertTrue(areDoublesEqual(prices.current, 174.37))
+      assertTrue(areDoublesEqual(prices.prior, 171.34))
     }
 }
