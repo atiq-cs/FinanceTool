@@ -5,9 +5,9 @@
 # Pimary Ref: https://docs.gradle.org/current/userguide/version_catalogs.html
 
 [versions]
-java = "23"
+java = "24"
 guava = "33.4.8-jre"  # https://github.com/google/guava/releases
-kotlin = "2.1.20"
+kotlin = "2.2.0"
 serialization = "1.8.1"
 ktor = "3.1.2"
 coroutines = "1.10.2"
