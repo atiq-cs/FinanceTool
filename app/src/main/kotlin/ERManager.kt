@@ -7,7 +7,7 @@
  * - get output table based on input table (extract delta for specific days)
  * - compute premium
  */
-package FinTool
+package ERDelta
 
 import kotlinx.coroutines.*
 import java.io.IOException

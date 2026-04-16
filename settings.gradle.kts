@@ -14,5 +14,5 @@ plugins {
   // alias(libs.plugins.foojay.resolver.convention)
 }
 
-rootProject.name = "FinTool"
+rootProject.name = "ERDelta"
 include("app")

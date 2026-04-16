@@ -8,7 +8,7 @@
  *      https://specifications.freedesktop.org/basedir-spec/latest
  */
 
-package FinTool
+package ERDelta
 
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -35,7 +35,7 @@ class ConfigManager {
   ): String
   {
     // xdg ref on notes above
-    val configFilePath: Path = Paths.get(getUserConfigDir(), "FinTool", "config.json")
+    val configFilePath: Path = Paths.get(getUserConfigDir(), "ERDelta", "config.json")
 
     if (!Files.exists(configFilePath)) {
         println("Config file not found at: $configFilePath")

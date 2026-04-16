@@ -4,7 +4,7 @@
  * Ref Documentation: https://www.alphavantage.co/documentation/#daily
  */
 
- package FinTool
+ package ERDelta
 
  // ktor related packages
 import io.ktor.client.*

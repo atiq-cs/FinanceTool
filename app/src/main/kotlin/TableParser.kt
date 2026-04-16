@@ -4,7 +4,7 @@
  *  - maintains order in output table that was in input table
  */
 
-package FinTool
+package ERDelta
 
 class TableParser {
   private var tokens: List<String> = emptyList()

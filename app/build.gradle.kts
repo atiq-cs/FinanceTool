@@ -56,5 +56,5 @@ java {
 
 application {
   // Define the main class for the application.
-  mainClass = "FinTool.AppKt"
+  mainClass = "ERDelta.AppKt"
 }

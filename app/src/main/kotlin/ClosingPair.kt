@@ -2,7 +2,7 @@
  * Close price tuple
  */
 
-package FinTool
+package ERDelta
 
 data class ClosingPair (
   val current: Double,
